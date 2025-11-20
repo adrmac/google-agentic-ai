@@ -1,0 +1,78 @@
+{
+  "eval_set_id": "home_automation_tests",
+  "name": "home_automation_tests",
+  "eval_cases": [
+    {
+      "eval_id": "basic_device_control",
+      "conversation": [
+        {
+          "invocation_id": "e-b0137818-9127-4072-9b0d-c192d53e2694",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Turn on the desk lamp in the office"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "I've turned on the desk lamp in the office."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "home_automation_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-49a48b25-a060-4899-898e-876a07eafb15",
+                        "args": {
+                          "status": "ON",
+                          "device_id": "desk lamp",
+                          "location": "office"
+                        },
+                        "name": "set_device_status"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "home_automation_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-49a48b25-a060-4899-898e-876a07eafb15",
+                        "name": "set_device_status",
+                        "response": {
+                          "success": true,
+                          "message": "Successfully set the desk lamp in office to on."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1763663245.590014
+        }
+      ],
+      "session_input": {
+        "app_name": "day4b",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1763663301.425108
+    }
+  ],
+  "creation_timestamp": 1763663277.0076318
+}
