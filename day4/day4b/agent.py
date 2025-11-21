@@ -173,6 +173,10 @@ print(
     "• poor_response_quality_test: May fail response_match if response differs too much"
 )
 
+# print("🚀 Run this command to execute evaluation:")
+# adk eval home_automation_agent home_automation_agent/integration.evalset.json --config_file_path=home_automation_agent/test_config.json --print_detailed_results
+
+
 # Analyzing evaluation results - the data science approach
 print("📊 Understanding Evaluation Results:")
 print()
@@ -192,3 +196,16 @@ print("1. Technical capability works (tool usage perfect)")
 print("2. Communication needs improvement (response quality failed)")
 print("3. Fix: Update agent instructions for clearer language or constrained response.")
 print()
+
+
+# User Simulation
+# While traditional evaluation methods rely on fixed test cases, real-world conversations are dynamic and unpredictable. This is where User Simulation comes in.
+
+## Define a ConversationScenario - outline an overall conversation_plan
+## LLM acts as user, uses the plan and history to generate user messages
+## Allows better testing of how an actual conversation would go
+
+# Docs: https://google.github.io/adk-docs/evaluate/user-sim/
+# Colab: https://github.com/google/adk-samples/blob/main/python/notebooks/evaluation/user_simulation_in_adk_evals.ipynb
+
+
