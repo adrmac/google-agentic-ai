@@ -1,0 +1,19 @@
+{
+  "eval_set_id": "set_with_conversation_scenarios",
+  "name": "set_with_conversation_scenarios",
+  "eval_cases": [
+    {
+      "eval_id": "821ac067",
+      "conversation_scenario": {
+        "starting_prompt": "Hi, I am running a tabletop RPG in which prime numbers are bad!",
+        "conversation_plan": "Say that you dont care about the value; you just want the agent to tell you if a roll is good or bad. Once the agent agrees, ask it to roll a d6. Finally, ask the agent to do the same with 2 d20."
+      },
+      "session_input": {
+        "app_name": "hello_world",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1763711271.740244
+    }
+  ],
+  "creation_timestamp": 1763711268.5297549
+}
