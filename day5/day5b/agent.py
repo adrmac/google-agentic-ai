@@ -123,7 +123,7 @@ subprocess.run([
 # Deploy failed: Failed to create Agent Engine: {'code': 3, 'message': 'Reasoning Engine resource [projects/217151334676/locations/europe-west4/reasoningEngines/75681584363077632] failed to start and cannot serve traffic. Please refer to our documentation (https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/troubleshooting/deploy) for checking logs and other troubleshooting tips.'}
 # Extensive troubleshooting with Gemini looking at the logs and troubleshooting advice gives no clues about this error.
 # It does work locally using 'adk run'
-
+# Maybe consider using 'Cloud Run' instead.
 
 # Initialize Vertex AI
 vertexai.init(project=PROJECT_ID, location=deployed_region)
