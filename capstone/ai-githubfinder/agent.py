@@ -8,18 +8,6 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 
 
-from dotenv import load_dotenv
-import asyncio
-
-load_dotenv()  # take environment variables from .env file
-
-try:
-    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-except Exception as e:
-    print(f"Error loading environment variables: {e}")
-    GOOGLE_API_KEY = None
-
-
 # ==========================================
 # 1. ENVIRONMENT SETUP & DEPENDENCY INSTALL
 # ==========================================
@@ -41,16 +29,24 @@ except ImportError:
     import google.generativeai as genai
 
 # from kaggle_secrets import UserSecretsClient
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env file
 
-# # ==========================================
-# # 2. CONFIGURATION
-# # ==========================================
-# # Try to retrieve secrets, otherwise rely on env vars or placeholder
+# ==========================================
+# 2. CONFIGURATION
+# ==========================================
+# Try to retrieve secrets, otherwise rely on env vars or placeholder
 # try:
 #     user_secrets = UserSecretsClient()
 #     GOOGLE_API_KEY = user_secrets.get_secret("GOOGLE_API_KEY")
 # except Exception:
 #     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "YOUR_GEMINI_KEY_HERE")
+
+try:
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+except Exception as e:
+    print(f"Error loading environment variables: {e}")
+    GOOGLE_API_KEY = None
 
 # GitHub configuration
 GITHUB_TOPIC = "docker"
@@ -185,9 +181,9 @@ def main():
 
     # 2. Initialize Agents
     scraper = GitHubAgent()
-    if "YOUR_GEMINI_KEY" in GOOGLE_API_KEY:
-        print("❌ Error: Please set GOOGLE_API_KEY in Kaggle Secrets.")
-        return
+    # if "YOUR_GEMINI_KEY" in GOOGLE_API_KEY:
+    #     print("❌ Error: Please set GOOGLE_API_KEY in Kaggle Secrets.")
+    #     return
     
     gemini_analyst = GeminiAnalyst(GOOGLE_API_KEY)
 
