@@ -198,14 +198,4 @@ print("3. Fix: Update agent instructions for clearer language or constrained res
 print()
 
 
-# User Simulation
-# While traditional evaluation methods rely on fixed test cases, real-world conversations are dynamic and unpredictable. This is where User Simulation comes in.
-
-## Define a ConversationScenario - outline an overall conversation_plan
-## LLM acts as user, uses the plan and history to generate user messages
-## Allows better testing of how an actual conversation would go
-
-# Docs: https://google.github.io/adk-docs/evaluate/user-sim/
-# Colab: https://github.com/google/adk-samples/blob/main/python/notebooks/evaluation/user_simulation_in_adk_evals.ipynb
-
 

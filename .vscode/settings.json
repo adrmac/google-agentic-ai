@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "agentic",
-        "resumability"
-    ]
+        "resumability",
+        "vertexai"
+    ],
+
+  "python.defaultInterpreterPath": "${workspaceFolder}/generative-ai/.venv-genai/bin/python"
 }
