@@ -5,6 +5,10 @@ load_dotenv()  # take environment variables from .env file
 from google import genai
 from google.genai import types
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
+
+
 
 ### Set up API key in Google AI Studio
 try:
@@ -55,17 +59,12 @@ print("Gemma2 response:")
 print(data["response"])
 
 
-response = requests.post(
-    f"{OLLAMA_HOST}/api/generate",
-    json={
-        "model": OLLAMA_MODEL,
-        "prompt": prompt,
-        "stream": False,
-    },
-    timeout=120,
-)
-response.raise_for_status()
 
-data = response.json()
-print("Gemma2 response:")
-print(data["response"])
+### Langchain with Ollama
+
+model = ChatOllama(model=OLLAMA_MODEL)
+prompt = "Write a haiku about building occupancy and sensor data."
+response = model.invoke([HumanMessage(content=prompt)])
+# there is also model.stream() equivalent to Ollama's stream: True
+
+print(response.content)

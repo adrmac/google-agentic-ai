@@ -18,6 +18,8 @@ GOOGLE_MODEL=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma2:2b") # or "llama3"
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
 
 
 ### Explore generation parameters
@@ -126,3 +128,27 @@ response = requests.post(
 data = response.json()
 print("Gemma version:")
 print(data["response"])
+
+
+### Langchain with Ollama
+
+model = ChatOllama(
+    model=OLLAMA_MODEL,
+    temperature=0.7,
+    top_p=0.9,
+    top_k=40,
+    num_predict=200,
+    seed=42
+    )
+
+# OR (less common)
+
+model = ChatOllama(
+    model=OLLAMA_MODEL,
+    options=options
+    )
+
+
+response = model.invoke("Give me a list of five creative startup ideas involving sensor data and building occupancy.")
+print("Langchain Ollama version:")
+print(response.content)

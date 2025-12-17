@@ -17,6 +17,10 @@ OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma2:2b") # or "llama3"
 
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
+## LangChain doesn't provide a model listing API for Ollama, so we use raw HTTP requests below
+
 ### Choose a model
 
 
@@ -52,11 +56,16 @@ print("Ollama list:")
 for model in models:
     print(model["name"])
 
+# alternate list method
+import ollama
+models = ollama.list()
+
+
 # show summary status for one model
 response = requests.post(
     f"{OLLAMA_HOST}/api/show",
     json={
-        "name": "gemma2:2b"
+        "name": OLLAMA_MODEL + ":2b"
     },
     timeout=120, # give up after 120s
 )
@@ -64,11 +73,7 @@ response.raise_for_status()
 info = response.json()
 # pprint(info, depth=1)
 
-## the default stats Ollama shows for a model are much different from what Google shows
-# Google stats are "product / API metadata" for a hosted API product
-# Ollama stats are "local runtime + weights metadata" for a local model + runtime
-
-# You can drill down on the /api/show response to get more detail
+# You can drill down on the /api/show response to get more detail if you want to match the Google model summary format
 
 def ollama_model_summary(model_name: str) -> dict:
     """

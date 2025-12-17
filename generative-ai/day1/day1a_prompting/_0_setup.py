@@ -11,6 +11,10 @@ from google import genai
 from google.genai import types
 
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
+
+
 ### Set up API key in Google AI Studio
 try:
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")

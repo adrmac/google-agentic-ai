@@ -5,6 +5,10 @@ load_dotenv()  # take environment variables from .env file
 from google import genai
 from google.genai import types
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
+
+
 ### Set up API key in Google AI Studio
 try:
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -98,3 +102,19 @@ print(response)
 
 response = send_message('Do you remember what my name is?')
 print(response)
+
+
+### Langchain with Ollama
+
+model = ChatOllama(model=OLLAMA_MODEL)
+
+messages = [
+    SystemMessage(content="You are a helpful assistant."),
+    HumanMessage(content="Hello! My name is Zlork."),
+    HumanMessage(content="Can you tell me something interesting about dinosaurs?"),
+    HumanMessage(content="Do you remember what my name is?"),
+]
+
+result = model.invoke(messages)
+print("Assistant:")
+print(result.content)

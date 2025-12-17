@@ -18,6 +18,8 @@ GOOGLE_MODEL=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma2:2b") # or "llama3"
 
+from langchain_ollama import ChatOllama
+from langchain_core.messages import HumanMessage, SystemMessage
 
 
 ### Prompting
@@ -74,6 +76,21 @@ data = response.json()
 print(data["response"]) 
 # In Ollama / Gemma it isn't constrained to a one-word classification - the instruction wasn't clear enough, it prints:
 # "The sentiment in the review" (5 tokens limit)
+
+
+### Ollama via LangChain
+model = ChatOllama(
+    model=OLLAMA_MODEL,
+    options=options,
+    )
+
+messages = [
+    HumanMessage(content=prompt)
+    ]
+
+result = model.invoke(messages)
+print("LangChain Ollama response:")
+print(result.content)
 
 
 ## Enum mode
@@ -160,6 +177,24 @@ if data.strip().lower() not in allowed:
     data = response.json()["response"]
     print(data)
 
+
+### Ollama via LangChain
+# Ollama doesn't have enum mode, but LangChain can provide an output parser to validate
+from langchain_core.output_parsers import EnumOutputParser
+
+parser = EnumOutputParser(enum=Sentiment) # using the Sentiment enum defined for Gemini above
+
+model = ChatOllama(
+    model=OLLAMA_MODEL,
+    options=options,
+    )
+
+response = model.invoke(prompt)
+print("LangChain Ollama response:")
+print(response.content)
+
+sentiment = parser.parse(response.content)
+print("Parsed sentiment:", sentiment)
 
 
 
